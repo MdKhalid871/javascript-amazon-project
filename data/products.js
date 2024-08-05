@@ -656,5 +656,37 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "zk0c2847e9-5-323-403f-b7cf-57j0854a955",
+    image: "images/products/backpack.jpg",
+    name: "Black Net Waterproof Backpack",
+    rating: {
+      stars: 4.0,
+      count: 3957
+    },
+    priceCents: 900,
+    keywords: [
+      "backpack",
+      "waterproof",
+      "net",
+      "mens"
+    ]
+  },
+  {
+    id: "umb9047e9-5323-40-3f-b7cf-57fde078655",
+    image: "images/products/umbrella.jpg",
+    name: "Light Green Umbrella",
+    rating: {
+      stars: 3.5,
+      count: 1267
+    },
+    priceCents: 690,
+    keywords: [
+      "umbrella",
+      "rainy",
+      "green",
+      "handy"
+    ]
   }
 ];
