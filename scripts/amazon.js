@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let productsHTML = '';
@@ -58,42 +58,21 @@ document.querySelector(".js-products-grid")
 .innerHTML = productsHTML;
 
 const addedMessageTimeouts = {};
-document.querySelectorAll(".js-add-to-cart")
-.forEach((button) => {
-    button.addEventListener("click",() => {
 
-        const {productId} = button.dataset;
 
-        let quantity= Number(document.querySelector(`.js-quantity-selector-${productId}`)
-        .value) ;
 
-        let matchingItem;
-        cart.forEach((item) => {
-            if(item.productId === productId){
-                matchingItem = item;
-            }
-        });
+function updateCartQuantity(){
+    let cartQuantity = 0;
 
-        if(matchingItem){
-            matchingItem.quantity += quantity;
-        }
-        else{
-            cart.push({
-                productId,
-                quantity
-            });
-    
-        }
-        
-        let cartQuantity = 0;
-
-        cart.forEach((item) => {
-            cartQuantity += item.quantity;
+        cart.forEach((cartItem) => {
+            cartQuantity += cartItem.quantity;
         });
         document.querySelector(".js-cart-quantity")
         .innerHTML = cartQuantity;
+}
 
-        const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`);
+function addMessageDisplay(productId){
+    const addedMessage = document.querySelector(`.js-added-to-cart-${productId}`);
         addedMessage.classList.add("add-to-cart-visible");
 
 
@@ -106,5 +85,15 @@ document.querySelectorAll(".js-add-to-cart")
             addedMessage.classList.remove("add-to-cart-visible");
         },2000);
         addedMessageTimeouts[productId] = timeoutId;
+}
+
+document.querySelectorAll(".js-add-to-cart")
+.forEach((button) => {
+    button.addEventListener("click",() => {
+        const {productId} = button.dataset;
+
+        addToCart(productId);
+        updateCartQuantity();
+        addMessageDisplay(productId);
     });
 });
